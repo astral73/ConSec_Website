@@ -1,0 +1,128 @@
+﻿@model Radus_ConSec.Models.EmpPatrol
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="font-size:25px;">Atanmış Devriyeler</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Güvenlik İsmi</th>
+                                        <th>Güvenlik Soyismi</th>
+                                        <th>Devriye İsmi</th>
+                                        <th>Tekrarlanma Süreleri (Dakika)</th>
+                                        <th>Düzenle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var x = 1;
+                                    }
+                                    @for (int i = 0; i < Model.employees.Count; i++)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@x</td>
+                                            <td>
+                                                @Model.employees[i].EMPLOYEENAME
+                                            </td>
+
+                                            <td>
+                                                @Model.employees[i].EMPLOYEELASTNAME
+                                            </td>
+
+                                            <td>
+                                                @Model.patrols[i].PATROLNAME
+                                            </td>
+
+                                            <td>
+                                                @Model.empPatrol[i].RESUMPTIONTIME
+                                            </td>
+
+                                            <td>
+                                                <a onclick="location.href = '@Url.Action("AtamaDuzenle","Yonetici", new { id = Model.empPatrol[i].EMPLOYEEID })'" class="btn btn-primary" style="color: white;">Atamayı Düzenle</a>
+                                            </td>
+
+                                            <td>
+                                                <a onclick=deleteEmpPatrol(@Model.empPatrol[i].EMPLOYEEID) class="btn btn-danger" style="color: white;">Devriye Atamasını Sil</a>
+                                            </td>
+                                        </tr>
+                                        x++;
+                                    }
+                                </tbody>
+                            </table>
+                            <a onclick="location.href = '@Url.Action("AtamaYap","Yonetici")'" class="btn btn-success" style="color:white;">Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>
+
+<script>
+    function deleteEmpPatrol(ID) {
+        swal({
+            title: 'Atama bilgilerini silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Yonetici/AtamayiSil',
+                        type: 'POST',
+                        data: { id: ID },
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "SİLİNDİ", text: "Silme işlemi başarıyla tamamlandı!", type: "success", icon: 'success'
+                                })
+                                    .then(function () {
+                                        location.reload();
+                                    }
+                                    );
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Silme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+</script>

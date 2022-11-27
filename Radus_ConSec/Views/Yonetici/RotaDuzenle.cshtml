@@ -1,0 +1,60 @@
+﻿@model Radus_ConSec.ROUTE
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("RotaDuzenle", "Yonetici", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="font-size:30px;">Rota Bilgilerini Düzenle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="#" class="needs-validation" novalidate="">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div class="d-block" style="font-size:20px;">
+                                                @Html.HiddenFor(m => m.ROUTEID)
+                                                Yeni Rota İsmi
+                                            </div>
+                                            @Html.TextBoxFor(a => a.ROUTENAME, new { style = "width:500px;", @class = "form-control" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="d-block" style="font-size:20px;">
+                                                Yeni Rota Açıklaması
+                                            </div>
+                                            @Html.TextBoxFor(a => a.ROUTEDESC, new { style = "width:500px;", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ROUTEQR))" width="200" , height="200" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" tabindex="4" style="font-size:15px;">
+                                        Düzenle
+                                    </button>
+
+                                    <button type="button" onclick="location.href='@Url.Action("Rotalar","Yonetici")'" class="btn btn-danger" tabindex="4" style="font-size:15px;">
+                                        Geri Dön
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

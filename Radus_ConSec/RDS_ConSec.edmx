@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RDS_ConSecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMINID" />
+          </Key>
+          <Property Name="ADMINID" Nullable="false" Type="int" />
+          <Property Name="ADMINEMAIL" Nullable="false" MaxLength="70" Type="nvarchar" />
+          <Property Name="ADMINPASSWORD" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="ADMINNAME" Nullable="false" MaxLength="30" Type="nvarchar" />
+          <Property Name="ADMINLASTNAME" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="ADMININSERTDATE" Nullable="false" Type="smalldatetime" />
+          <Property Name="ADMINEDITDATE" Nullable="false" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="int" />
+          <Property Name="EMPLOYEEEMAIL" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="EMPLOYEEPASSWORD" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="EMPLOYEENAME" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="EMPLOYEELASTNAME" Nullable="false" MaxLength="100" Type="nvarchar" />
+          <Property Name="EMPLOYEEINSERTDATE" Nullable="false" Type="smalldatetime" />
+          <Property Name="EMPLOYEEEDITDATE" Nullable="false" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="EMPLOYEEPATROL">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="int" />
+          <Property Name="PATROLID" Nullable="false" Type="int" />
+          <Property Name="RESUMPTIONTIME" Nullable="false" Type="float" />
+        </EntityType>
+        <EntityType Name="MOVEMENTS">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+            <PropertyRef Name="PATROLID" />
+            <PropertyRef Name="ROUTEID" />
+            <PropertyRef Name="TRANSTIME" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="int" />
+          <Property Name="PATROLID" Nullable="false" Type="int" />
+          <Property Name="ROUTEID" Nullable="false" Type="int" />
+          <Property Name="TRANSTIME" Nullable="false" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PATROL">
+          <Key>
+            <PropertyRef Name="PATROLID" />
+          </Key>
+          <Property Name="PATROLID" Nullable="false" Type="int" />
+          <Property Name="PATROLNUM" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="PATROLNAME" MaxLength="100" Type="nvarchar" />
+          <Property Name="PATROLDESC" MaxLength="500" Type="nvarchar" />
+          <Property Name="PATROLINSERTDATE" Nullable="false" Type="smalldatetime" />
+          <Property Name="PATROLEDITDATE" Nullable="false" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="PATROLITEM">
+          <Key>
+            <PropertyRef Name="PATROLID" />
+            <PropertyRef Name="ROUTEID" />
+            <PropertyRef Name="ROUTEROW" />
+          </Key>
+          <Property Name="PATROLID" Nullable="false" Type="int" />
+          <Property Name="ROUTEID" Nullable="false" Type="int" />
+          <Property Name="ROUTEROW" Nullable="false" Type="int" />
+        </EntityType>
+        <EntityType Name="ROUTE">
+          <Key>
+            <PropertyRef Name="ROUTEID" />
+          </Key>
+          <Property Name="ROUTEID" Nullable="false" Type="int" />
+          <Property Name="ROUTEDESC" MaxLength="500" Type="nvarchar" />
+          <Property Name="ROUTENAME" MaxLength="100" Type="nvarchar" />
+          <Property Name="ROUTEQR" Nullable="false" Type="image" />
+          <Property Name="ROUTEINSERTDATE" Nullable="false" Type="smalldatetime" />
+          <Property Name="ROUTEEDITDATE" Nullable="false" Type="smalldatetime" />
+          <Property Name="ROUTECODE" Nullable="false" MaxLength="20" Type="nvarchar" />
+        </EntityType>
+        <EntityContainer Name="RDS_ConSecModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEEPATROL" EntityType="Self.EMPLOYEEPATROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVEMENTS" EntityType="Self.MOVEMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATROL" EntityType="Self.PATROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATROLITEM" EntityType="Self.PATROLITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROUTE" EntityType="Self.ROUTE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RDS_ConSecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RDS_ConSecEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMIN" EntityType="RDS_ConSecModel.ADMIN" />
+          <EntitySet Name="EMPLOYEE" EntityType="RDS_ConSecModel.EMPLOYEE" />
+          <EntitySet Name="PATROL" EntityType="RDS_ConSecModel.PATROL" />
+          <EntitySet Name="ROUTE" EntityType="RDS_ConSecModel.ROUTE" />
+          <EntitySet Name="PATROLITEM" EntityType="RDS_ConSecModel.PATROLITEM" />
+          <EntitySet Name="EMPLOYEEPATROL" EntityType="RDS_ConSecModel.EMPLOYEEPATROL" />
+          <EntitySet Name="MOVEMENTS" EntityType="RDS_ConSecModel.MOVEMENTS" />
+        </EntityContainer>
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMINID" />
+          </Key>
+          <Property Name="ADMINID" Nullable="false" Type="Int32" />
+          <Property Name="ADMINEMAIL" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ADMINPASSWORD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ADMINNAME" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ADMINLASTNAME" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ADMININSERTDATE" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="ADMINEDITDATE" Nullable="false" Precision="0" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="Int32" />
+          <Property Name="EMPLOYEEEMAIL" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="EMPLOYEEPASSWORD" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="EMPLOYEENAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="EMPLOYEELASTNAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="EMPLOYEEINSERTDATE" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="EMPLOYEEEDITDATE" Nullable="false" Precision="0" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="PATROL">
+          <Key>
+            <PropertyRef Name="PATROLID" />
+          </Key>
+          <Property Name="PATROLID" Nullable="false" Type="Int32" />
+          <Property Name="PATROLNUM" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PATROLNAME" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PATROLDESC" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PATROLINSERTDATE" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="PATROLEDITDATE" Nullable="false" Precision="0" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="ROUTE">
+          <Key>
+            <PropertyRef Name="ROUTEID" />
+          </Key>
+          <Property Name="ROUTEID" Nullable="false" Type="Int32" />
+          <Property Name="ROUTEDESC" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ROUTENAME" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ROUTEQR" Nullable="false" MaxLength="Max" FixedLength="false" Type="Binary" />
+          <Property Name="ROUTEINSERTDATE" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="ROUTEEDITDATE" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="ROUTECODE" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+        </EntityType>
+        <EntityType Name="PATROLITEM">
+          <Key>
+            <PropertyRef Name="PATROLID" />
+            <PropertyRef Name="ROUTEID" />
+            <PropertyRef Name="ROUTEROW" />
+          </Key>
+          <Property Name="PATROLID" Nullable="false" Type="Int32" />
+          <Property Name="ROUTEID" Nullable="false" Type="Int32" />
+          <Property Name="ROUTEROW" Nullable="false" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EMPLOYEEPATROL">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="Int32" />
+          <Property Name="PATROLID" Nullable="false" Type="Int32" />
+          <Property Name="RESUMPTIONTIME" Nullable="false" Type="Double" />
+        </EntityType>
+        <EntityType Name="MOVEMENTS">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+            <PropertyRef Name="PATROLID" />
+            <PropertyRef Name="ROUTEID" />
+            <PropertyRef Name="TRANSTIME" />
+          </Key>
+          <Property Name="EMPLOYEEID" Nullable="false" Type="Int32" />
+          <Property Name="PATROLID" Nullable="false" Type="Int32" />
+          <Property Name="ROUTEID" Nullable="false" Type="Int32" />
+          <Property Name="TRANSTIME" Nullable="false" Precision="3" Type="DateTime" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RDS_ConSecModelStoreContainer" CdmEntityContainer="RDS_ConSecEntities1">
+          <EntitySetMapping Name="ADMIN">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="ADMINEDITDATE" ColumnName="ADMINEDITDATE" />
+                <ScalarProperty Name="ADMININSERTDATE" ColumnName="ADMININSERTDATE" />
+                <ScalarProperty Name="ADMINLASTNAME" ColumnName="ADMINLASTNAME" />
+                <ScalarProperty Name="ADMINNAME" ColumnName="ADMINNAME" />
+                <ScalarProperty Name="ADMINPASSWORD" ColumnName="ADMINPASSWORD" />
+                <ScalarProperty Name="ADMINEMAIL" ColumnName="ADMINEMAIL" />
+                <ScalarProperty Name="ADMINID" ColumnName="ADMINID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEE">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="EMPLOYEEEDITDATE" ColumnName="EMPLOYEEEDITDATE" />
+                <ScalarProperty Name="EMPLOYEEINSERTDATE" ColumnName="EMPLOYEEINSERTDATE" />
+                <ScalarProperty Name="EMPLOYEELASTNAME" ColumnName="EMPLOYEELASTNAME" />
+                <ScalarProperty Name="EMPLOYEENAME" ColumnName="EMPLOYEENAME" />
+                <ScalarProperty Name="EMPLOYEEPASSWORD" ColumnName="EMPLOYEEPASSWORD" />
+                <ScalarProperty Name="EMPLOYEEEMAIL" ColumnName="EMPLOYEEEMAIL" />
+                <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATROL">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.PATROL">
+              <MappingFragment StoreEntitySet="PATROL">
+                <ScalarProperty Name="PATROLEDITDATE" ColumnName="PATROLEDITDATE" />
+                <ScalarProperty Name="PATROLINSERTDATE" ColumnName="PATROLINSERTDATE" />
+                <ScalarProperty Name="PATROLDESC" ColumnName="PATROLDESC" />
+                <ScalarProperty Name="PATROLNAME" ColumnName="PATROLNAME" />
+                <ScalarProperty Name="PATROLNUM" ColumnName="PATROLNUM" />
+                <ScalarProperty Name="PATROLID" ColumnName="PATROLID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROUTE">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.ROUTE">
+              <MappingFragment StoreEntitySet="ROUTE">
+                <ScalarProperty Name="ROUTECODE" ColumnName="ROUTECODE" />
+                <ScalarProperty Name="ROUTEEDITDATE" ColumnName="ROUTEEDITDATE" />
+                <ScalarProperty Name="ROUTEINSERTDATE" ColumnName="ROUTEINSERTDATE" />
+                <ScalarProperty Name="ROUTEQR" ColumnName="ROUTEQR" />
+                <ScalarProperty Name="ROUTENAME" ColumnName="ROUTENAME" />
+                <ScalarProperty Name="ROUTEDESC" ColumnName="ROUTEDESC" />
+                <ScalarProperty Name="ROUTEID" ColumnName="ROUTEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATROLITEM">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.PATROLITEM">
+              <MappingFragment StoreEntitySet="PATROLITEM">
+                <ScalarProperty Name="ROUTEROW" ColumnName="ROUTEROW" />
+                <ScalarProperty Name="ROUTEID" ColumnName="ROUTEID" />
+                <ScalarProperty Name="PATROLID" ColumnName="PATROLID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEEPATROL">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.EMPLOYEEPATROL">
+              <MappingFragment StoreEntitySet="EMPLOYEEPATROL">
+                <ScalarProperty Name="RESUMPTIONTIME" ColumnName="RESUMPTIONTIME" />
+                <ScalarProperty Name="PATROLID" ColumnName="PATROLID" />
+                <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVEMENTS">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.MOVEMENTS">
+              <MappingFragment StoreEntitySet="MOVEMENTS">
+                <ScalarProperty Name="TRANSTIME" ColumnName="TRANSTIME" />
+                <ScalarProperty Name="ROUTEID" ColumnName="ROUTEID" />
+                <ScalarProperty Name="PATROLID" ColumnName="PATROLID" />
+                <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

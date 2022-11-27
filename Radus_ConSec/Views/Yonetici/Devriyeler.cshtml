@@ -1,0 +1,135 @@
+﻿@model Radus_ConSec.RDS_ConSecEntities1
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="font-size:25px;">Devriye Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>İsim</th>
+                                        <th>Açıklama</th>
+                                        <th>Ekleme Tarihi</th>
+                                        <th>Düzenleme Tarihi</th>
+                                        <th>Rotalar</th>
+                                        <th>Düzenle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var z = 1;
+                                    }
+                                    @{
+                                        var pd = (IEnumerable<dynamic>)ViewBag.patrolDetails;
+                                        var pid = (IEnumerable<dynamic>)ViewBag.rlDetails;
+                                    }
+
+                                    @foreach (var e in pd)
+                                    {
+                                        var xd = pid.Where(x => x.PATROLID == e.PATROLID).OrderBy(m => m.ROUTEROW).ToList();
+                                        List<string> t = new List<string>();
+
+                                        foreach (var s in xd)
+                                        {
+                                            var a = s.ROUTEID.ToString();
+                                            t.Add(a);
+                                        }
+                                        var joined = "";
+                                        if (t.Count != 0)
+                                        {
+                                            joined = t.Aggregate((a, b) => a + ", " + b);
+                                        }
+
+                                        <tr>
+                                            <td>@z</td>
+                                            <td>@e.PATROLNAME</td>
+                                            <td>@e.PATROLDESC</td>
+                                            <td>@e.PATROLINSERTDATE</td>
+                                            <td>@e.PATROLEDITDATE</td>
+
+                                            <td>@joined</td>
+
+                                            <td><a onclick="location.href = '@Url.Action("DevriyeDuzenle","Yonetici", new { id = e.PATROLID })'" class="btn btn-primary" style="color:white;">Düzenle</a></td>
+
+                                            <td>
+                                                <a onclick=deleteDev(@e.PATROLID) class="btn btn-danger" style="color:white;">Sil</a>
+                                            </td>
+                                        </tr>
+                                        z++;
+                                    }
+                                </tbody>
+                            </table>
+                            <a onclick="location.href = '@Url.Action("DevriyeEkle","Yonetici")'" class="btn btn-success" style="color:white;">Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>
+
+<script>
+    function deleteDev(ID) {
+        swal({
+            title: 'Devriye bilgilerini silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Yonetici/DevriyeSil',
+                        type: 'POST',
+                        data: { id: ID },
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "SİLİNDİ", text: "Silme işlemi başarıyla tamamlandı!", type: "success", icon: 'success'
+                                })
+                                    .then(function () {
+                                        location.reload();
+                                    }
+                                    );
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Silme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+</script>

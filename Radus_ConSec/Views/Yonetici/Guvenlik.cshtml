@@ -1,0 +1,110 @@
+﻿@model Radus_ConSec.EMPLOYEE
+
+@{
+    ViewBag.Title = "ConSec - Yönetici Paneli";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="font-size:25px;">Güvenlik Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>İsim</th>
+                                        <th>Soyisim</th>
+                                        <th>Düzenle</th>
+                                        <th>Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var x = 1;
+                                    }
+                                    @foreach (var e in ViewBag.empDetails)
+                                    {
+                                        <tr>
+                                            <td>@x.ToString()</td>
+                                            <td>@e.EMPLOYEENAME</td>
+                                            <td>@e.EMPLOYEELASTNAME</td>
+                                            <td><a onclick="location.href = '@Url.Action("GuvenlikDuzenle","Yonetici", new { id = e.EMPLOYEEID })'" class="btn btn-primary" style="color:white;">Düzenle</a></td>
+                                            <td>
+                                                <a onclick=deleteEmp(@e.EMPLOYEEID) class="btn btn-danger" style="color:white;">Sil</a>
+                                            </td>
+                                        </tr>
+                                        x++;
+                                    }
+
+                                </tbody>
+                            </table>
+                            <a onclick="location.href = '@Url.Action("GuvenlikEkle","Yonetici")'" class="btn btn-success" style="color:white;">Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>
+
+<script>
+    function deleteEmp(ID) {
+        swal({
+            title: 'Güvenlik bilgilerini silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Yonetici/GuvenlikSil',
+                        type: 'POST',
+                        data: { id: ID },
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "SİLİNDİ", text: "Silme işlemi başarıyla tamamlandı!", type: "success", icon:'success'
+                                })
+                                    .then(function () {
+                                    location.reload();
+                                }
+                                );
+
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Silme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+</script>

@@ -1,0 +1,52 @@
+﻿@model Radus_ConSec.Models.Route
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="font-size:30px;">Rota Ekle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="#" class="needs-validation" novalidate="" lang="tr">
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        Rota İsmi
+                                    </div>
+                                    @Html.TextBoxFor(a => a.RouteName, new { style = "width:500px;", @class = "form-control" })
+                                    @Html.ValidationMessageFor(a => a.RouteName)
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        Rota Açıklaması
+                                    </div>
+                                    @Html.TextBoxFor(a => a.RouteDesc, new { style = "width:500px;", @class = "form-control" })
+                                    @Html.ValidationMessageFor(a => a.RouteDesc)
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" tabindex="4" style="font-size:15px;">
+                                        Rota Ekle
+                                    </button>
+
+                                    <button type="button" onclick="location.href='@Url.Action("Rotalar","Yonetici")'" class="btn btn-danger" tabindex="4" style="font-size:15px;">
+                                        Geri Dön
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

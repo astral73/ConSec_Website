@@ -1,0 +1,65 @@
+﻿@model Radus_ConSec.Models.EmpPatrol
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="font-size:30px;">Güvenliğe Devriye Atama Sayfası</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="#" class="needs-validation" novalidate="">
+
+                                <div class="form-group">
+                                    <div class="d-block">
+                                        Devriye Listesi
+                                    </div>
+                                    @Html.DropDownListFor(m => m.patrolID, Model.lst, "--Devriyeler--", new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block">
+                                        Güvenlik Listesi
+                                    </div>
+                                    @Html.DropDownListFor(m => m.empID, Model.lst2, "--Güvenlikler--", new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block">
+                                        Tekrarlanma Süresi
+                                    </div>
+                                    @Html.TextBoxFor(a => a.resumptionTime, new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block">
+                                        Zaman Tipleri
+                                    </div>
+                                    @Html.DropDownListFor(m => m.timeType, Model.lstTime, "--Zaman Tipleri--", new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" tabindex="4">
+                                        Güvenliğe Devriyeyi Ata
+                                    </button>
+
+                                    <button type="button" onclick="location.href='@Url.Action("GuvenlikDevriyeleri","Yonetici")'" class="btn btn-danger" tabindex="4" style="font-size:15px;">
+                                        Geri Dön
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

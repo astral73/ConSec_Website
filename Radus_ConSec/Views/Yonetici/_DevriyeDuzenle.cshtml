@@ -1,0 +1,135 @@
+﻿
+@model Radus_ConSec.Models.DevriyeFormModel
+
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            @{
+                var joined = "";
+                if (Model.routeStr.Count != 0)
+                { joined = Model.routeStr.Aggregate((a, b) => a + ", " + b); }
+
+            }
+            <tr>
+                <td>
+                    Devriye İçindeki Rotaların Sırası:&emsp;
+                    @joined<br /><br />
+                    <a onclick=devSil() class="btn btn-danger " style="color: white; font-size: 15px; width:200px;">Devriye Rota Sırası Sil</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table" id="table-1">
+        <tbody>
+            <tr>
+                <td style="height:30px; width:500px">
+                    @Html.DropDownListFor(m => m.routeID, Model.lst, "--Rotalar--", new { @class = "form-control" })
+                </td>
+            </tr>
+
+            <tr>
+                <td style="">
+                    <input class="btn btn-primary" type="button" onclick="editRoutes()" value="Rotayı Ekle" style="height:30px; width:200px; font-size:15px;" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>
+
+<script>
+    function editRoutes() {
+        var id = document.getElementById("routeID").value;
+        swal({
+            title: 'Bu rotayı devriyeye eklemek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Yonetici/DevriyeRotasiDuzenle',
+                        type: 'POST',
+                        data: { rID: id },
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "EKLENDİ", text: "Ekleme işlemi başarıyla tamamlandı!", type: "success", icon: 'success'
+                                })
+                                    .then(function () {
+                                        location.reload();
+                                    }
+                                    );
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Ekleme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+
+    function devSil() {
+        swal({
+            title: 'Rota sırasını silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Yonetici/DevriyeRotasiSil',
+                        type: 'POST',
+                        data: { tid: @Model.patrolID },
+                        dataType: 'json',
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "SİLİNDİ", text: "Silme işlemi başarıyla tamamlandı!", type: "success", icon: 'success'
+                                })
+                                    .then(function () {
+                                        location.reload();
+                                    }
+                                    );
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Silme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+</script>

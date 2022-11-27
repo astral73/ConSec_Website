@@ -1,0 +1,65 @@
+﻿@model Radus_ConSec.EMPLOYEE
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("GuvenlikDuzenle", "Yonetici", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="font-size:30px;">Güvenlik Bilgilerini Düzenle</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="#" class="needs-validation" novalidate="">
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        @Html.HiddenFor(m => m.EMPLOYEEID)
+                                        Yeni Güvenlik İsmi
+                                    </div>
+                                    @Html.TextBoxFor(a => a.EMPLOYEENAME, new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        Yeni Güvenlik Soyismi
+                                    </div>
+                                    @Html.TextBoxFor(a => a.EMPLOYEELASTNAME, new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        Yeni Güvenlik e - Postası
+                                    </div>
+                                    @Html.TextBoxFor(a => a.EMPLOYEEEMAIL, new { style = "width:500px;", @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="d-block" style="font-size:20px;">
+                                        Yeni Güvenlik Şifresi
+                                    </div>
+                                    @Html.TextBoxFor(a => a.EMPLOYEEPASSWORD, new { style = "width:500px;", @class = "form-control" , @type = "password" })
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" tabindex="4" style="font-size:15px;">
+                                        Düzenle
+                                    </button>
+
+                                    <button type="button" onclick="location.href='@Url.Action("Guvenlik","Yonetici")'" class="btn btn-danger" tabindex="4" style="font-size:15px;">
+                                        Geri Dön
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

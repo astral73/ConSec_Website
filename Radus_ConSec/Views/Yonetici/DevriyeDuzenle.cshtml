@@ -1,0 +1,65 @@
+﻿@model Radus_ConSec.Models.DevriyeFormModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="font-size:30px;">Devriye Düzenleme Sayfası</h4>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div id="partial">
+                            @{ Html.RenderAction("DevriyeRotaDuzenle", "Yonetici", new { id = Model.patrolID });}
+                        </div>
+
+                        <form method="post" action="#" class="needs-validation" novalidate="">
+
+                            <div class="form-group">
+                                <div class="d-block" style="font-size:20px;">
+                                    @Html.HiddenFor(m => m.Patrol.PATROLID)
+                                    Yeni Devriye İsmi
+                                </div>
+                                @Html.TextBoxFor(a => a.Patrol.PATROLNAME, new { style = "width:500px;", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <div class="d-block" style="font-size:20px;">
+                                    Yeni Devriye Açıklaması
+                                </div>
+                                @Html.TextBoxFor(a => a.Patrol.PATROLDESC, new { style = "width:500px;", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" tabindex="4" style="font-size:15px;">
+                                    Devriye Düzenlemeyi Bitir
+                                </button>
+
+                                <button type="button" onclick="location.href='@Url.Action("Devriyeler","Yonetici")'" class="btn btn-danger" tabindex="4" style="font-size:15px;">
+                                    Geri Dön
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>

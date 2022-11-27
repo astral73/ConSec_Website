@@ -1,0 +1,102 @@
+﻿@model Radus_ConSec.Models.DevriyeFormModel
+
+<div class="table-responsive">
+    <table class="table" id="table-1">
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DropDownListFor(m => m.routeID, Model.lst, "--Rotalar--", new { @class = "form-control", style = "width: 500px;" })
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <input class="btn btn-success" type="button" onclick="addRoutes()" value="Rotayı Ekle" style="color:white; font-size:15px; height:40px; width:200px" />
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Devriye İçindeki Rotaların Sırası
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var joined = "";
+                if ((Session["rota"] as List<string>).Count != 0)
+                { joined = (Session["rota"] as List<string>).Aggregate((a, b) => a + ", " + b); }
+
+            }
+            <tr>
+                <td>
+                    @joined
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- General JS Scripts -->
+<script src="~/assets/js/app.min.js"></script>
+<!-- JS Libraies -->
+<script src="~/assets/bundles/sweetalert/sweetalert.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="~/assets/js/page/sweetalert.js"></script>
+<!-- Template JS File -->
+<script src="~/assets/js/scripts.js"></script>
+<!-- Custom JS File -->
+<script src="~/assets/js/custom.js"></script>
+
+<script>
+    function addRoutes() {
+        var id = document.getElementById("routeID").value;
+        swal({
+            title: 'Bu rotayı devriyeye eklemek istediğinize emin misiniz?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Yonetici/DevriyeRotasiEkle',
+                        data: {
+                            rID: id,
+                        },
+                        success: function (bool) {
+                            if (bool == true) {
+                                swal({
+                                    title: "EKLENDİ!", text: "Ekleme işlemi başarıyla tamamlandı!", type: "success", icon: 'success'
+                                })
+                                    .then(function () {
+                                        location.reload();
+                                    }
+                                    );
+                            }
+                            else if (bool == false) {
+                                swal("HATA", "Silme başarısız!", "error")
+                            }
+                            else {
+                                swal("UYARI", bool, "warning")
+                            }
+                        },
+                        error: function (error) {
+
+                        }
+                    });
+                }
+                else {
+                    console.log('User clicked me.');
+                }
+            });
+    }
+</script>

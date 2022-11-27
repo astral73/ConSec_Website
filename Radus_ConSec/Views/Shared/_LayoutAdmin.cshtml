@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+
+<!-- pagination.html  21 Nov 2019 03:51:03 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>ConSec - Yönetici Paneli</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/assets/css/app.min.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/components.css">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel='shortcut icon' type='image/x-icon' href='~/assets/img/favicon.ico' />
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar sticky">
+                <div class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li>
+                            <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn"> <i data-feather="align-justify"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                                <i data-feather="maximize"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <form class="form-inline mr-auto">
+                                <div class="search-element">
+                                    <input class="form-control" type="search" placeholder="Arama Yap" aria-label="Search" data-width="200">
+                                    <button class="btn" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="main-content">
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+            </div>
+            <div class="main-sidebar sidebar-style-2">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a onclick="location.href = '@Url.Action("Anasayfa","Yonetici")'">
+                            <span class="logo-name">ConSec®</span>
+                        </a>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("Guvenlik","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Güvenlik Görevlileri</span></a>
+                        </li>
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("Rotalar","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Rotalar</span></a>
+                        </li>
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("Profilim","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Profilim</span></a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("Devriyeler","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Devriye Tanımları</span></a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("GuvenlikDevriyeleri","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Güvenlik Devriyeleri</span></a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a onclick="location.href = '@Url.Action("Cikis","Yonetici")'" class="nav-link"><i data-feather="briefcase"></i><span>Çıkış Yap</span></a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <!-- General JS Scripts -->
+    <script src="~/assets/js/app.min.js"></script>
+    <!-- JS Libraies -->
+    <script src="~/assets/bundles/datatables/datatables.min.js"></script>
+    <script src="~/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/js/page/sweetalert.js"></script>
+    <!-- Page Specific JS File -->
+    <script src="~/assets/js/page/datatables.js"></script>
+    <!-- Template JS File -->
+    <script src="~/assets/js/scripts.js"></script>
+    <!-- Custom JS File -->
+    <script src="~/assets/js/custom.js"></script>
+</body>
+
+
+<!-- pagination.html  21 Nov 2019 03:51:03 GMT -->
+</html>

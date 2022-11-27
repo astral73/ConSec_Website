@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RDS_ConSecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMINID" />
+          </Key>
+          <Property Name="ADMINID" Type="int" Nullable="false" />
+          <Property Name="ADMINEMAIL" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="ADMINPASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMINNAME" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ADMINLASTNAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ADMININSERTDATE" Type="smalldatetime" Nullable="false" />
+          <Property Name="ADMINEDITDATE" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Type="int" Nullable="false" />
+          <Property Name="EMPLOYEEEMAIL" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="EMPLOYEEPASSWORD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMPLOYEENAME" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="EMPLOYEELASTNAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EMPLOYEEINSERTDATE" Type="smalldatetime" Nullable="false" />
+          <Property Name="EMPLOYEEEDITTIME" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QR">
+          <Key>
+            <PropertyRef Name="QRID" />
+          </Key>
+          <Property Name="QRID" Type="int" Nullable="false" />
+          <Property Name="QRIMAGE" Type="image" Nullable="false" />
+          <Property Name="QRDESCRIPTION" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="QRINSERTDATE" Type="smalldatetime" Nullable="false" />
+          <Property Name="QREDITDATE" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROUTE">
+          <Key>
+            <PropertyRef Name="ROUTEID" />
+          </Key>
+          <Property Name="ROUTEID" Type="int" Nullable="false" />
+          <Property Name="ROUTENAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="INSERTDATE" Type="smalldatetime" Nullable="false" />
+          <Property Name="EDITDATE" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RDS_ConSecModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QR" EntityType="Self.QR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROUTE" EntityType="Self.ROUTE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RDS_ConSecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMINID" />
+          </Key>
+          <Property Name="ADMINID" Type="Int32" Nullable="false" />
+          <Property Name="ADMINEMAIL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMINPASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMINNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMINLASTNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ADMININSERTDATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ADMINEDITDATE" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMPLOYEEID" />
+          </Key>
+          <Property Name="EMPLOYEEID" Type="Int32" Nullable="false" />
+          <Property Name="EMPLOYEEEMAIL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMPLOYEEPASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMPLOYEENAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMPLOYEELASTNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMPLOYEEINSERTDATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EMPLOYEEEDITTIME" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="QR">
+          <Key>
+            <PropertyRef Name="QRID" />
+          </Key>
+          <Property Name="QRID" Type="Int32" Nullable="false" />
+          <Property Name="QRIMAGE" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="QRDESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QRINSERTDATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="QREDITDATE" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="ROUTE">
+          <Key>
+            <PropertyRef Name="ROUTEID" />
+          </Key>
+          <Property Name="ROUTEID" Type="Int32" Nullable="false" />
+          <Property Name="ROUTENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INSERTDATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EDITDATE" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="RDS_ConSecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
+          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="QRs" EntityType="Self.QR" />
+          <EntitySet Name="ROUTEs" EntityType="Self.ROUTE" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RDS_ConSecModelStoreContainer" CdmEntityContainer="RDS_ConSecEntities">
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="ADMINID" ColumnName="ADMINID" />
+                <ScalarProperty Name="ADMINEMAIL" ColumnName="ADMINEMAIL" />
+                <ScalarProperty Name="ADMINPASSWORD" ColumnName="ADMINPASSWORD" />
+                <ScalarProperty Name="ADMINNAME" ColumnName="ADMINNAME" />
+                <ScalarProperty Name="ADMINLASTNAME" ColumnName="ADMINLASTNAME" />
+                <ScalarProperty Name="ADMININSERTDATE" ColumnName="ADMININSERTDATE" />
+                <ScalarProperty Name="ADMINEDITDATE" ColumnName="ADMINEDITDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEEs">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+                <ScalarProperty Name="EMPLOYEEEMAIL" ColumnName="EMPLOYEEEMAIL" />
+                <ScalarProperty Name="EMPLOYEEPASSWORD" ColumnName="EMPLOYEEPASSWORD" />
+                <ScalarProperty Name="EMPLOYEENAME" ColumnName="EMPLOYEENAME" />
+                <ScalarProperty Name="EMPLOYEELASTNAME" ColumnName="EMPLOYEELASTNAME" />
+                <ScalarProperty Name="EMPLOYEEINSERTDATE" ColumnName="EMPLOYEEINSERTDATE" />
+                <ScalarProperty Name="EMPLOYEEEDITTIME" ColumnName="EMPLOYEEEDITTIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QRs">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.QR">
+              <MappingFragment StoreEntitySet="QR">
+                <ScalarProperty Name="QRID" ColumnName="QRID" />
+                <ScalarProperty Name="QRIMAGE" ColumnName="QRIMAGE" />
+                <ScalarProperty Name="QRDESCRIPTION" ColumnName="QRDESCRIPTION" />
+                <ScalarProperty Name="QRINSERTDATE" ColumnName="QRINSERTDATE" />
+                <ScalarProperty Name="QREDITDATE" ColumnName="QREDITDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROUTEs">
+            <EntityTypeMapping TypeName="RDS_ConSecModel.ROUTE">
+              <MappingFragment StoreEntitySet="ROUTE">
+                <ScalarProperty Name="ROUTEID" ColumnName="ROUTEID" />
+                <ScalarProperty Name="ROUTENAME" ColumnName="ROUTENAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="INSERTDATE" ColumnName="INSERTDATE" />
+                <ScalarProperty Name="EDITDATE" ColumnName="EDITDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

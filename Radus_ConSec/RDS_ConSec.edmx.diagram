@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2433b9e101e74d25aaf996e8f187f27a" Name="Diagram1">
+        <EntityTypeShape EntityType="RDS_ConSecModel.ADMIN" PointX="2.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.EMPLOYEE" PointX="4.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.PATROL" PointX="0.75" PointY="4.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.ROUTE" PointX="2.75" PointY="4.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.PATROLITEM" PointX="4.75" PointY="4.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.EMPLOYEEPATROL" PointX="0.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="RDS_ConSecModel.MOVEMENTS" PointX="6.75" PointY="0.75" Width="1.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
